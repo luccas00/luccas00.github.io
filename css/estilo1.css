@@ -1,0 +1,24 @@
+.texto{
+    color: red;
+    background: black;
+}
+
+p {
+    color: gold;
+    border: 1px;
+    border-color: black;
+    border-style: solid;
+    background: fixed;
+    background-color: gray;
+}
+
+@media (min-width: 600px) {
+
+    table {
+        border: 2px;
+        border-color: silver;
+        border-style: dotted;
+        width: 80%;    
+    }
+    
+}
