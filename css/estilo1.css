@@ -3,6 +3,17 @@
     background: black;
 }
 
+.texto2{
+    color: salmon;
+    background: gold;
+    border: 2px;
+    border-color: silver;
+}
+
+h2 {
+    color: blueviolet;
+}
+
 p {
     color: gold;
     border: 1px;
@@ -13,6 +24,11 @@ p {
 }
 
 @media (min-width: 600px) {
+    
+    body {
+        width: 98vw;
+        background-image: url("../imagens/fundo.png");
+    }
 
     table {
         border: 2px;
@@ -20,5 +36,5 @@ p {
         border-style: dotted;
         width: 80%;    
     }
-    
+
 }
