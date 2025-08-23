@@ -54,21 +54,46 @@
     img{max-width:100%;height:auto}
   </style>
 </head>
-<body>
+<body style="margin:0; padding:0; overflow-x:hidden; overflow-y:auto;">
+
+  <!-- Background Matrix -->
+  <iframe src="https://rezmason.github.io/matrix/?version=resurrections&skipIntro=true"
+          frameborder="0"
+          scrolling="no"
+          style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1;">
+  </iframe>
+
   <main class="container">
     <section class="card hero">
+  <!-- Primeira Linha (Foto + Títulos) -->
+  <div style="display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: center;">
+    
+    <!-- Coluna da Esquerda (Foto) -->
+    <div class="center">
       <img src="https://github.com/luccas00.png" 
-        alt="Foto de perfil de Luccas" 
-        width="180" 
-        style="border-radius: 50%; border: 3px solid var(--border); margin-bottom: 16px;">
+           alt="Foto de perfil de Luccas" 
+           width="180" 
+           style="border-radius: 50%; border: 3px solid var(--border);">
+    </div>
+    
+    <!-- Coluna da Direita (Títulos e resumo curto) -->
+    <div>
       <h1># Hello there, I'm Luccas 👋</h1>
       <h2>👨🏼‍💻🎓 I'm a Power Platform &amp; Dynamics 365 Developer and a Student!!</h2>
       <p><strong>Senior Developer</strong> | Specialist in Power Platform &amp; Dynamics 365 | Certified Power Platform Functional Consultant [PL-200] | Business Solutions Expert</p>
-      <p>🔭 Committed to continuously improving my development skills and problem-solving abilities, aiming to deliver efficient technological solutions.</p>
-      <p>🌱 Enhancing my knowledge in Microsoft Power Platform, Dynamics 365, .NET, ASP.NET MVC, Node.js, Microsoft SQL Server, and Azure to deliver integrated and scalable solutions.</p>
-      <p>💻 At Smart Consulting, I contribute to improving the efficiency and quality of our clients' projects. I have experience in adapting and configuring Dynamics 365 business applications, with a focus on Project Operations (project and finance operations), Customer Service (customer support), and Dynamics 365 Sales.</p>
-      <p>🏫 Pursuing a Bachelor's degree in Information Systems at UFOP (Federal University of Ouro Preto)</p>
-    </section>
+    </div>
+
+  </div>
+
+  <!-- Segunda Linha (Descrição detalhada) -->
+  <div style="margin-top: 24px;">
+    <p>🔭 Committed to continuously improving my development skills and problem-solving abilities, aiming to deliver efficient technological solutions.</p>
+    <p>🌱 Enhancing my knowledge in Microsoft Power Platform, Dynamics 365, .NET, ASP.NET MVC, Node.js, Microsoft SQL Server, and Azure to deliver integrated and scalable solutions.</p>
+    <p>💻 At Smart Consulting, I contribute to improving the efficiency and quality of our clients' projects. I have experience in adapting and configuring Dynamics 365 business applications, with a focus on Project Operations (project and finance operations), Customer Service (customer support), and Dynamics 365 Sales.</p>
+    <p>🏫 Pursuing a Bachelor's degree in Information Systems at UFOP (Federal University of Ouro Preto)</p>
+  </div>
+</section>
+
 
     <section class="card">
       <div class="section-title">
@@ -160,6 +185,7 @@
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
+
 </html>
 
 
