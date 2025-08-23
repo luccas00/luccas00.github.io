@@ -199,6 +199,21 @@
   </main>
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
+
+    (function () {
+      function sendHeight() {
+        var h = Math.max(
+          document.documentElement.scrollHeight,
+          document.body.scrollHeight
+        );
+        // envia altura para o host
+        parent.postMessage({ type: 'EMBED_HEIGHT', height: h }, '*');
+      }
+      window.addEventListener('load', sendHeight);
+      window.addEventListener('resize', sendHeight);
+      new ResizeObserver(sendHeight).observe(document.body);
+    })();
+
   </script>
 </body>
 
