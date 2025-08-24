@@ -195,42 +195,43 @@
       height: 1cm;
       display: block;
     }
+    /* Navbar 90% da página, centralizada, mais fina */
+    .card.navbar{
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%); /* centraliza fora do .container */
+      width: 90vw;                 /* 90% da página */
+      max-width: 1200px;           /* opcional: trava largura máxima */
+      padding: 8px 12px;           /* mais fina verticalmente */
+      margin-bottom: 1cm;          /* gap até o resto da página */
+    }
 
-    /* Navbar full-bleed mais fina + gap inferior de 1cm */
-  .card.navbar{
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    width: 100vw;
-    padding: 8px 12px;      /* antes 24px — deixa mais fina */
-    margin-bottom: 1cm;     /* gap solicitado abaixo da seção */
-  }
+    /* 1 linha, centralizado, com fallback de rolagem se necessário */
+    .card.navbar .cta-grid{
+      width: 100%;                 /* override do seu width:90% global */
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+      justify-content: center;     /* centraliza os botões */
+      align-items: center;         /* alinha verticalmente */
+      gap: 10px;
+      margin: 0 auto;
+      overflow-x: auto;
+    }
 
-  /* 1 linha, centralizado, com rolagem horizontal se faltar espaço */
-  .card.navbar .cta-grid{
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    overflow-x: auto;
-  }
+    /* Botões um pouco mais compactos só na navbar */
+    .card.navbar .btn{
+      padding: 8px 12px;
+    }
 
-  /* Botões mais compactos na navbar (sem afetar os demais .btn) */
-  .card.navbar .btn{
-    padding: 8px 12px;
-  }
+    /* Ícones na navbar */
+    .card.navbar .btn .icon{
+      width: 20px;
+      height: 20px;
+      display: block;
+      fill: currentColor;
+    }
 
-  /* Tamanho dos ícones na navbar (garantido) */
-  .card.navbar .btn .icon{
-    width: 20px;
-    height: 20px;
-    display: block;
-    fill: currentColor;  /* usa a cor do texto do botão */
-  }
 
     /* força 2 colunas e centragem perfeita */
   .stats {
