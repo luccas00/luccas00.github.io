@@ -47,7 +47,7 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     // Se nunca foi definido, escolha o DEFAULT = DESATIVADO (0)
-    if (localStorage.getItem(STATE_KEY) === null) setActive(false);
+    if (localStorage.getItem(STATE_KEY) === null) setActive(true);
 
     const btn = ensureToggle();
     applyState();
