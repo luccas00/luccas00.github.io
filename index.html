@@ -512,100 +512,98 @@
     const DEFAULT_LANG = 'pt-BR';
     const SUPPORTED = ['pt-BR','en-US'];
 
-    // 1) Resolver idioma: URL ?lang=xx > localStorage > navegador > default
-    const urlLang = new URLSearchParams(location.search).get('lang');
-    const storedLang = localStorage.getItem('lang');
-    const navLang = (navigator.language || '').startsWith('pt') ? 'pt-BR' : 'en-US';
+    // --- Estado global simples ---
+    let lang = resolveLang();
+    let dict = {};
 
-    let lang = (urlLang && SUPPORTED.includes(urlLang)) ? urlLang
-            : (storedLang && SUPPORTED.includes(storedLang)) ? storedLang
-            : navLang || DEFAULT_LANG;
+    // --- Boot ---
+    persistLang(lang);
+    setHtmlLang(lang);
+    syncToggleUI(lang);
+    loadAndApply(lang);
 
-    // 2) Persistir e normalizar URL (remove ?lang after apply, mantendo share se quiser)
-    localStorage.setItem('lang', lang);
-    if (urlLang) {
-      const u = new URL(location.href);
-      u.searchParams.delete('lang');
-      history.replaceState({}, '', u);
-    }
-
-    // 3) Aplicar atributo lang no HTML (acessibilidade/SEO)
-    document.documentElement.setAttribute('lang', lang);
-
-    // 4) Fetch do catálogo e render
-    fetch(`/i18n/${lang}.json`, { cache: 'no-store' })
-      .then(r => r.json())
-      .then(dict => applyTranslations(dict))
-      .catch(() => console.warn('i18n: catálogo não carregado'));
-
-    function applyTranslations(dict) {
-      // Elementos com texto interno
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[key] !== undefined) el.textContent = dict[key];
-      });
-
-      // Elementos com atributos traduzíveis
-      document.querySelectorAll('[data-i18n-attr]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        const attrs = el.getAttribute('data-i18n-attr').split(',').map(s => s.trim());
-        if (dict[key] !== undefined) {
-          attrs.forEach(a => el.setAttribute(a, dict[key]));
-        }
-      });
-
-      // Ajustar rótulo do toggle
-      const toggle = document.getElementById('lang-toggle');
-      if (toggle) toggle.textContent = (lang === 'pt-BR') ? 'EN' : 'PT';
-    }
-
-    // 5) Toggle de idioma (round-trip multi-página)
-    document.addEventListener('click', e => {
-      if (e.target && e.target.id === 'lang-toggle') {
-        lang = (lang === 'pt-BR') ? 'en-US' : 'pt-BR';
-        localStorage.setItem('lang', lang);
-        // Hard refresh para manter consistência em sites multi-página
-        location.href = setLangParam(location.href, lang);
-      }
-    });
-
-    function setLangParam(href, newLang) {
-      const u = new URL(href);
-      u.searchParams.set('lang', newLang); // permite deep-link já com idioma
-      return u.toString();
-    }
-  })();
-  </script>
-
-  <script>
-  (function(){
-    const SUPPORTED = ['pt-BR','en-US'];
-    const stored = localStorage.getItem('lang');
-    const lang = (stored && SUPPORTED.includes(stored)) ? stored
-                : ((navigator.language||'').toLowerCase().startsWith('pt') ? 'pt-BR' : 'en-US');
-
-    // Marcar ativo no toggle
-    document.querySelectorAll('.lang-opt').forEach(btn=>{
-      const isActive = btn.dataset.lang === lang;
-      btn.classList.toggle('is-active', isActive);
-      btn.setAttribute('aria-pressed', String(isActive));
-    });
-
-    // Handler de troca
+    // --- Handlers ---
     document.addEventListener('click', (e)=>{
       const btn = e.target.closest('.lang-opt');
       if(!btn) return;
       const newLang = btn.dataset.lang;
-      if(!SUPPORTED.includes(newLang)) return;
-      if(newLang === localStorage.getItem('lang')) return;
+      if(!SUPPORTED.includes(newLang) || newLang === lang) return;
 
-      localStorage.setItem('lang', newLang);
-      const u = new URL(location.href);
-      u.searchParams.set('lang', newLang);
-      location.href = u.toString(); // refresh para aplicar em todas as páginas
+      lang = newLang;
+      persistLang(lang);
+      setHtmlLang(lang);
+      syncToggleUI(lang);
+      updateUrlParam(lang);   // mantém deep-link
+      loadAndApply(lang);     // *** aplica sem reload ***
     });
+
+    // --- Funções utilitárias ---
+    function resolveLang(){
+      const urlLang = new URLSearchParams(location.search).get('lang');
+      const stored   = localStorage.getItem('lang');
+      const navLang  = (navigator.language || '').toLowerCase().startsWith('pt') ? 'pt-BR' : 'en-US';
+      return (urlLang && SUPPORTED.includes(urlLang)) ? urlLang
+          : (stored   && SUPPORTED.includes(stored)) ? stored
+          : navLang || DEFAULT_LANG;
+    }
+
+    function persistLang(l){ localStorage.setItem('lang', l); }
+
+    function setHtmlLang(l){ document.documentElement.setAttribute('lang', l); }
+
+    function updateUrlParam(l){
+      const u = new URL(location.href);
+      u.searchParams.set('lang', l);
+      history.replaceState({}, '', u); // sem reload
+    }
+
+    function syncToggleUI(l){
+      document.querySelectorAll('.lang-opt').forEach(btn=>{
+        const active = btn.dataset.lang === l;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-pressed', String(active));
+      });
+    }
+
+    async function loadAndApply(l){
+      const path = `i18n/${l}.json`; // *** relativo, funciona no GitHub Pages ***
+      try{
+        const res = await fetch(path, { cache: 'no-store' });
+        if(!res.ok) throw 0;
+        dict = await res.json();
+        applyTranslations(dict);
+      }catch{
+        console.warn('i18n: catálogo não carregado:', path);
+      }
+    }
+
+    function applyTranslations(d){
+      // Texto interno
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        if (d[key] !== undefined) el.textContent = d[key];
+      });
+
+      // Atributos
+      document.querySelectorAll('[data-i18n-attr]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        const attrs = (el.getAttribute('data-i18n-attr')||'')
+          .split(',').map(s=>s.trim()).filter(Boolean);
+        if (d[key] !== undefined) attrs.forEach(a=> el.setAttribute(a, d[key]));
+      });
+    }
+
+    // Limpa ?lang= da URL após aplicar (opcional)
+    (function normalizeUrl(){
+      const u = new URL(location.href);
+      if(u.searchParams.has('lang')){
+        u.searchParams.delete('lang');
+        history.replaceState({}, '', u);
+      }
+    })();
   })();
   </script>
+
 
 
 </body>
