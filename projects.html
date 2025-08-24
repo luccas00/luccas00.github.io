@@ -151,7 +151,7 @@
           <img class="icon" src="/images/development-web-development-svgrepo-com.svg" alt="Projects">
           <span>Projects</span>
         </div>
-        <a class="btn" href="/" rel="noopener">Home</a>
+        <a class="btn" href="/" rel="noopener" data-i18n="home">Home</a>
       </div>
     </section>
 
@@ -335,6 +335,77 @@
     else bind();
   })();
   </script>
+
+  <script>
+  (function () {
+    const DEFAULT_LANG = 'pt-BR';
+    const SUPPORTED = ['pt-BR','en-US'];
+
+    // 1) Resolver idioma: URL ?lang=xx > localStorage > navegador > default
+    const urlLang = new URLSearchParams(location.search).get('lang');
+    const storedLang = localStorage.getItem('lang');
+    const navLang = (navigator.language || '').startsWith('pt') ? 'pt-BR' : 'en-US';
+
+    let lang = (urlLang && SUPPORTED.includes(urlLang)) ? urlLang
+            : (storedLang && SUPPORTED.includes(storedLang)) ? storedLang
+            : navLang || DEFAULT_LANG;
+
+    // 2) Persistir e normalizar URL (remove ?lang after apply, mantendo share se quiser)
+    localStorage.setItem('lang', lang);
+    if (urlLang) {
+      const u = new URL(location.href);
+      u.searchParams.delete('lang');
+      history.replaceState({}, '', u);
+    }
+
+    // 3) Aplicar atributo lang no HTML (acessibilidade/SEO)
+    document.documentElement.setAttribute('lang', lang);
+
+    // 4) Fetch do catálogo e render
+    fetch(`/i18n/${lang}.json`, { cache: 'no-store' })
+      .then(r => r.json())
+      .then(dict => applyTranslations(dict))
+      .catch(() => console.warn('i18n: catálogo não carregado'));
+
+    function applyTranslations(dict) {
+      // Elementos com texto interno
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.textContent = dict[key];
+      });
+
+      // Elementos com atributos traduzíveis
+      document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const attrs = el.getAttribute('data-i18n-attr').split(',').map(s => s.trim());
+        if (dict[key] !== undefined) {
+          attrs.forEach(a => el.setAttribute(a, dict[key]));
+        }
+      });
+
+      // Ajustar rótulo do toggle
+      const toggle = document.getElementById('lang-toggle');
+      if (toggle) toggle.textContent = (lang === 'pt-BR') ? 'EN' : 'PT';
+    }
+
+    // 5) Toggle de idioma (round-trip multi-página)
+    document.addEventListener('click', e => {
+      if (e.target && e.target.id === 'lang-toggle') {
+        lang = (lang === 'pt-BR') ? 'en-US' : 'pt-BR';
+        localStorage.setItem('lang', lang);
+        // Hard refresh para manter consistência em sites multi-página
+        location.href = setLangParam(location.href, lang);
+      }
+    });
+
+    function setLangParam(href, newLang) {
+      const u = new URL(href);
+      u.searchParams.set('lang', newLang); // permite deep-link já com idioma
+      return u.toString();
+    }
+  })();
+  </script>
+
 
 </body>
 </html>
