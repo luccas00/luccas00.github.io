@@ -450,7 +450,7 @@
     .fallback{background:var(--badge-bg);border:1px dashed var(--border);border-radius:12px;padding:16px;color:var(--muted);text-align:center}
 
 
-    a.btn.with-icon[href="https://github.com/luccas00"] {
+    #myLine {
       position: relative;
-      top: -10px; /* ajusta pra cima */
+      top: -10px; /* move o bloco inteiro pra cima */
     }
