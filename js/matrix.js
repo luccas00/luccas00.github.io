@@ -1,43 +1,31 @@
-// js/matrix.js — Componente único, stateful, idempotente
+// js/matrix.js — Single Source of Truth
 (function(){
   const STATE_KEY = 'matrix_active';
-  const DEFAULT_ACTIVE = true; // on por padrão (ajuste se quiser)
-
-  // URL única (padronize aqui)
   const MATRIX_URL = 'https://rezmason.github.io/matrix/?version=resurrections&skipIntro=false&fps=32&raindropLength=1&fallSpeed=0.5&animationSpeed=0.2&cycleSpeed=0.006';
 
-  // ===== Infra de estado =====
-  const isActive = () => {
-    const v = localStorage.getItem(STATE_KEY);
-    return (v === null) ? DEFAULT_ACTIVE : v === '1';
-  };
-  const setActive = (flag) => {
-    localStorage.setItem(STATE_KEY, flag ? '1' : '0');
-  };
+  // Só considera ATIVO quando for explicitamente "1"
+  const isActive = () => localStorage.getItem(STATE_KEY) === '1';
+  const setActive = (flag) => localStorage.setItem(STATE_KEY, flag ? '1' : '0');
 
-  // ===== DOM helpers =====
   function mountIframe(){
-    if (document.getElementById('matrix-bg')) return; // idempotência
+    if (document.getElementById('matrix-bg')) return; // já montado
     const iframe = document.createElement('iframe');
     iframe.id = 'matrix-bg';
     iframe.src = MATRIX_URL;
     iframe.setAttribute('frameborder','0');
     iframe.setAttribute('scrolling','no');
     Object.assign(iframe.style, {
-      position:'fixed', top:'0', left:'0', width:'100%', height:'100%',
+      position:'fixed', inset:'0', width:'100%', height:'100%',
       zIndex:'-1', pointerEvents:'none', border:'0'
     });
     document.body.prepend(iframe);
   }
   function unmountIframe(){
-    const el = document.getElementById('matrix-bg');
-    if (el) el.remove();
+    document.getElementById('matrix-bg')?.remove();
   }
 
-  function ensureToggleButton(){
+  function ensureToggle(){
     let btn = document.getElementById('toggle-matrix');
-
-    // Se não existir, cria um botão flutuante
     if (!btn) {
       const wrap = document.createElement('div');
       wrap.className = 'matrix-toggle';
@@ -48,33 +36,29 @@
     }
     return btn;
   }
-
-  function syncUI(btn){
-    const active = isActive();
-    btn.textContent = active ? 'Desativar Matrix' : 'Ativar Matrix';
+  function syncButton(btn){
+    btn.textContent = isActive() ? 'Desativar Matrix' : 'Ativar Matrix';
   }
-
   function applyState(){
     if (isActive()) mountIframe(); else unmountIframe();
     const btn = document.getElementById('toggle-matrix');
-    if (btn) syncUI(btn);
+    if (btn) syncButton(btn);
   }
 
-  // ===== Init =====
   document.addEventListener('DOMContentLoaded', () => {
-    // Aplica estado atual
+    // Se nunca foi definido, escolha o DEFAULT = DESATIVADO (0)
+    if (localStorage.getItem(STATE_KEY) === null) setActive(false);
+
+    const btn = ensureToggle();
     applyState();
 
-    // Garante botão e handler (uma vez por página)
-    const btn = ensureToggleButton();
     btn.addEventListener('click', () => {
-      const next = !isActive();
-      setActive(next);
-      applyState(); // monta/desmonta + atualiza label
+      setActive(!isActive());
+      applyState();
     });
   });
 
-  // Sincroniza entre abas/janelas se necessário
+  // Sincroniza entre abas e após navegação
   window.addEventListener('storage', (e) => {
     if (e.key === STATE_KEY) applyState();
   });
