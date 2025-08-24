@@ -182,6 +182,20 @@
       margin-left:auto; /* ancora o botão à direita */
     }
 
+    .btn.with-icon{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* tamanho do ícone = 3 cm (grande mesmo) */
+    .btn.with-icon .icon{
+      width: 3cm;
+      height: 3cm;
+      display: block;
+    }
+
+
   </style>
 </head>
 
@@ -196,15 +210,12 @@
 
     <section class="card">
       <div class="cta-grid">
-        <a class="btn primary" href="https://luccas00.github.io/" target="_blank" rel="noopener">Portfólio</a>
-        <a class="btn" href="https://github.com/luccas00" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="mailto:luccas.carneiro@aluno.ufop.edu.br">Contato</a>
         <a class="btn" href="#projetos">Projetos</a>
         <a class="btn" href="https://www.linkedin.com/in/luccas-carneiro-678689171/" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn" href="/resume.pdf" target="_blank" rel="noopener">Currículo (PDF)</a>
         <a class="btn" href="#certificacoes">Certificações</a>
         <a class="btn" href="#formacoes">Formações</a>
-        <a class="btn" href="https://learn.microsoft.com/" target="_blank" rel="noopener">Microsoft Learn</a>
+        <a class="btn" href="https://learn.microsoft.com/pt-br/users/luccascarneiro-1661/credentials" target="_blank" rel="noopener">Microsoft Learn</a>
       </div>
     </section>
 
@@ -223,7 +234,10 @@
         <div>
           <div class="title-actions">
             <h1>Hello there, I'm Luccas 👋</h1>
-            <a class="btn" href="https://github.com/luccas00" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn with-icon" href="https://github.com/luccas00" target="_blank" rel="noopener">
+              <img class="icon" src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub">
+              <span>GitHub</span>
+            </a>
           </div>
 
           <h2>👨🏼‍💻🎓 I'm a Power Platform &amp; Dynamics 365 Developer and a Student!!</h2>
