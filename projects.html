@@ -74,6 +74,15 @@
       flex-shrink: 0;
     }
 
+    .title-actions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .title-actions .btn{
+      margin-left:auto; /* ancora o botão à direita */
+    }
+
   </style>
 </head>
 <body>
@@ -87,11 +96,9 @@
 
     <!-- Header da página -->
     <section class="card">
-      <div class="btn with-icon">
-        <img class="icon" src="/images/development-web-development-svgrepo-com.svg" alt="Projects">
-          <span>Projects</span>
-      </div>
-      <div class="actions">
+      <div class="title-actions">
+        <img class="icon" src="/images/development-web-development-svgrepo-com.svg">
+          <span> Projects</span>
         <a class="btn" href="/" rel="noopener">Home</a>
       </div>
     </section>
