@@ -276,7 +276,14 @@
   .lang-opt.is-active{ background:var(--accent); color:#fff; }
   .lang-opt:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
-
+  .card.navbar .matrix-switch{
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    z-index: 1;
+  }
 
   </style>
 </head>
@@ -292,6 +299,11 @@
 
     <section class="card navbar">
       <div class="cta-grid" role="navigation" aria-label="Navegação principal">
+
+        <div class="matrix-switch" role="group" aria-label="Ativar ou desativar Matrix">
+          <button id="matrix-toggle" class="lang-opt" type="button" aria-pressed="true">🌌 Matrix</button>
+        </div>
+
         <a class="btn with-icon" href="/projects.html">
           <img class="icon" src="/images/development-web-development-svgrepo-com.svg" alt="Projects">
           <span data-i18n="projects">Projects</span>
@@ -612,6 +624,33 @@
     })();
   })();
   </script>
+
+  <script>
+  (function(){
+    const iframe = document.getElementById('matrix-bg'); // seu <iframe id="matrix-bg">
+    const btn = document.getElementById('matrix-toggle');
+
+    // Carrega estado salvo
+    let active = localStorage.getItem('matrix-active') !== 'false';
+    iframe.style.display = active ? 'block' : 'none';
+    btn.setAttribute('aria-pressed', String(active));
+
+    updateLabel();
+
+    btn.addEventListener('click', ()=>{
+      active = !active;
+      iframe.style.display = active ? 'block' : 'none';
+      btn.setAttribute('aria-pressed', String(active));
+      localStorage.setItem('matrix-active', active);
+      updateLabel();
+    });
+
+    function updateLabel(){
+      btn.textContent = active ? '🌌 Matrix' : '🚫 Matrix';
+    }
+  })();
+  </script>
+
 
 
 
