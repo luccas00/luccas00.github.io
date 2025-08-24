@@ -101,13 +101,37 @@
     }
 
     .hovercard{
-      position:absolute; z-index:50; max-width:640px; width:min(90vw,640px);
+      position:absolute; z-index:50; max-width:800px; width:min(90vw,800px);
       background:var(--card); color:var(--text); border:1px solid var(--border);
       border-radius:12px; box-shadow:0 12px 30px rgba(0,0,0,.35);
       padding:16px; overflow:hidden;
     }
-    .hovercard .body{ max-height:360px; overflow:auto; }
+
     .project-pin{ position:relative; }
+
+    /* Firefox */
+    .hovercard .body {
+      max-height:360px; 
+      overflow:auto; 
+      scrollbar-width: thin;
+      scrollbar-color: #ccc transparent; /* polegar claro, trilho transparente */
+    }
+
+    /* Chrome, Edge, Safari (WebKit) */
+    .hovercard .body::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .hovercard .body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .hovercard .body::-webkit-scrollbar-thumb {
+      background-color: #ccc;   /* cinza claro */
+      border-radius: 6px;
+      border: 2px solid transparent; /* cria espaço no trilho */
+    }
+
 
   </style>
 </head>
@@ -261,14 +285,17 @@
 
     function placeCard(card, anchor){
       const rect = anchor.getBoundingClientRect();
-      const top = window.scrollY + rect.bottom + 8;
-      const left = Math.min(
-        window.scrollX + rect.left,
-        window.scrollX + document.documentElement.clientWidth - card.offsetWidth - 8
-      );
+      const top = window.scrollY + rect.bottom + 8; // 8px abaixo do pin
+      const left = window.scrollX + rect.left + rect.width/2 - card.offsetWidth/2;
+
+      // Garante que não ultrapasse a viewport
+      const maxLeft = window.scrollX + document.documentElement.clientWidth - card.offsetWidth - 8;
+      const safeLeft = Math.max(window.scrollX + 8, Math.min(left, maxLeft));
+
       card.style.top = `${top}px`;
-      card.style.left = `${left}px`;
+      card.style.left = `${safeLeft}px`;
     }
+
 
     function bind(){
       document.querySelectorAll('.project-pin[data-readme]').forEach(anchor=>{
