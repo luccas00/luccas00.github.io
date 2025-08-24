@@ -297,6 +297,24 @@
   color: #fff;
 }
 
+.card.navbar .theme-switch{
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  z-index: 1;
+}
+
+/* Paletas explícitas (sobrescrevem o prefers-color-scheme) */
+:root[data-theme="dark"]{
+  --bg:#0b0c10; --card:#121317; --text:#e6e6e6; --muted:#b3b3b3;
+  --link:#58a6ff; --accent:#1f6feb; --border:#23262d; --badge-bg:#1e1f25;
+}
+:root[data-theme="light"]{
+  --bg:#ffffff; --card:#f7f8fa; --text:#0b0c10; --muted:#343a40;
+  --link:#0a66c2; --accent:#0a66c2; --border:#e6e8ee; --badge-bg:#eef1f6;
+}
 
   </style>
 </head>
@@ -348,6 +366,11 @@
         <div class="lang-switch" role="group" aria-label="Selecionar idioma">
           <button class="lang-opt" data-lang="pt-BR" type="button" aria-pressed="false">PT</button>
           <button class="lang-opt" data-lang="en-US" type="button" aria-pressed="false">EN</button>
+        </div>
+
+        <div class="theme-switch" role="group" aria-label="Selecionar tema">
+          <button class="lang-opt theme-opt" data-theme="dark"  type="button" aria-pressed="false">🌙</button>
+          <button class="lang-opt theme-opt" data-theme="light" type="button" aria-pressed="false">☀️</button>
         </div>
 
       </div>
@@ -655,6 +678,43 @@
   })();
   </script>
 
+<script>
+(function(){
+  const THEME_KEY = 'theme';
+  const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  const saved = localStorage.getItem(THEME_KEY);
+  let theme = (saved === 'light' || saved === 'dark') ? saved : (prefersLight ? 'light' : 'dark');
+
+  applyTheme(theme);
+  syncToggle(theme);
+
+  // Click handler
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.theme-opt');
+    if(!btn) return;
+    const newTheme = btn.dataset.theme;
+    if(newTheme !== 'light' && newTheme !== 'dark') return;
+    if(newTheme === theme) return;
+
+    theme = newTheme;
+    localStorage.setItem(THEME_KEY, theme);
+    applyTheme(theme);
+    syncToggle(theme);
+  });
+
+  function applyTheme(t){
+    document.documentElement.setAttribute('data-theme', t);
+  }
+
+  function syncToggle(t){
+    document.querySelectorAll('.theme-opt').forEach(b=>{
+      const active = b.dataset.theme === t;
+      b.classList.toggle('is-active', active);          // reaproveita seu estilo .lang-opt.is-active
+      b.setAttribute('aria-pressed', String(active));
+    });
+  }
+})();
+</script>
 
 
 
