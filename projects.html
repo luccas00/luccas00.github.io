@@ -7,133 +7,7 @@
   <meta name="description" content="Projects of Luccas Carneiro (EN/PT-BR).">
   <link rel="icon" type="image/png" href="https://github.com/luccas00.png">
 
-  <style>
-    :root{
-      --bg:#0b0c10; --card:#121317; --text:#e6e6e6; --muted:#b3b3b3;
-      --link:#58a6ff; --accent:#1f6feb; --border:#23262d; --badge-bg:#1e1f25;
-    }
-    @media (prefers-color-scheme: light){
-      :root{ --bg:#fff; --card:#f7f8fa; --text:#0b0c10; --muted:#343a40; --link:#0a66c2; --accent:#0a66c2; --border:#e6e8ee; --badge-bg:#eef1f6; }
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text)}
-    a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
-    .container{max-width:980px;margin:0 auto;padding:24px}
-
-    /* Cards com mais gap vertical */
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:24px;
-      margin:64px 0;                /* antes 16px -> mais respiro */
-    }
-
-    h1,h2,h3{margin:0 0 12px;line-height:1.25}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 14px;border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:10px;font-weight:600;text-decoration:none;gap:8px;transition:transform .06s ease,border-color .2s,background .2s}
-    .btn:hover{border-color:var(--accent);transform:translateY(-1px)}
-    .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-    .title-actions{display:flex;align-items:center;gap:12px}
-    .title-actions .actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
-
-    /* Título alinhado à direita */
-    .section-header{
-      display:flex;
-      justify-content:flex-start;   /* empurra o título para a esquerda */
-      align-items:center;
-      margin-bottom:12px;
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 1.4rem;       /* maior que o texto padrão */
-      font-weight: 600;
-      color: var(--text);
-      margin-right: auto;      /* garante alinhamento à esquerda */
-    }
-
-    .section-title .icon {
-      width: 28px;             /* maior que o do card normal */
-      height: 28px;
-      flex-shrink: 0;
-    }
-
-
-    /* Pin centralizado */
-    .project-pin{
-      display:block;
-      width:fit-content;          /* shrink-to-content */
-      margin:0 auto 12px;         /* centraliza horizontalmente */
-    }
-    .project-pin img{
-      display:block;
-      width:100%;
-      height:auto;
-      border-radius:12px;
-      border:1px solid var(--border);
-    }
-
-    /* Meta/descrição */
-    .project-meta{ color: var(--muted); font-size:.95rem; text-align:center; }
-    .project-body{ max-width:720px; margin:0 auto; text-align:center; }
-
-    .btn.with-icon {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn.with-icon .icon {
-      width: 22px;
-      height: 22px;
-      flex-shrink: 0;
-    }
-
-    .title-actions{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-    .title-actions .btn{
-      margin-left:auto; /* ancora o botão à direita */
-    }
-
-    .hovercard{
-      position:absolute; z-index:50; max-width:900px; width:min(90vw,900px);
-      background:var(--card); color:var(--text); border:1px solid var(--border);
-      border-radius:12px; box-shadow:0 12px 30px rgba(0,0,0,.35);
-      padding:16px; overflow:hidden;
-    }
-
-    .project-pin{ position:relative; }
-
-    /* Firefox */
-    .hovercard .body {
-      max-height:360px; 
-      overflow:auto; 
-      scrollbar-width: thin;
-      scrollbar-color: #ccc transparent; /* polegar claro, trilho transparente */
-    }
-
-    /* Chrome, Edge, Safari (WebKit) */
-    .hovercard .body::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    .hovercard .body::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .hovercard .body::-webkit-scrollbar-thumb {
-      background-color: #ccc;   /* cinza claro */
-      border-radius: 6px;
-      border: 2px solid transparent; /* cria espaço no trilho */
-    }
-
-
-  </style>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -143,6 +17,7 @@
     style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1;"></iframe>
 
   <main class="container">
+    <div id="navbar"></div>
 
     <!-- Header da página -->
     <section class="card">
@@ -221,120 +96,15 @@
       </p>
     </footer>
   </main>
-
-  <script>
-    const y = document.getElementById('y');
-    if (y) y.textContent = new Date().getFullYear();
-  </script>
+  <script src="js/navbar.js"></script>
+  <script src="js/common.js"></script>
 
   <!-- 1) Dependências -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
 
   <!-- 2) Seu script -->
-  <script>
-  (() => {
-    const cache = new Map(); // url -> html
-
-    function parseRepo(rawUrl){
-      const m = rawUrl.match(/^https:\/\/raw\.githubusercontent\.com\/([^\/]+)\/([^\/]+)\/([^\/]+)\//i);
-      if(!m) return null;
-      return { owner:m[1], repo:m[2], ref:m[3] };
-    }
-
-    function rewriteRelatives(html, rawUrl){
-      const meta = parseRepo(rawUrl); if(!meta) return html;
-      const baseRaw = `https://raw.githubusercontent.com/${meta.owner}/${meta.repo}/${meta.ref}/`;
-      const baseWeb = `https://github.com/${meta.owner}/${meta.repo}/`;
-      const wrap = document.createElement('div'); wrap.innerHTML = html;
-
-      wrap.querySelectorAll('img').forEach(img=>{
-        const src = img.getAttribute('src') || '';
-        if (!/^https?:\/\//i.test(src) && !src.startsWith('data:')) {
-          img.src = new URL(src, baseRaw).href;
-        }
-        img.loading = 'lazy';
-        img.style.maxWidth = '100%';
-        img.referrerPolicy = 'no-referrer';
-      });
-
-      wrap.querySelectorAll('a').forEach(a=>{
-        const href = a.getAttribute('href') || '';
-        if (!/^https?:\/\//i.test(href) && !href.startsWith('#') && href!=='') {
-          a.href = new URL(href, baseWeb).href;
-        }
-        a.target = '_blank'; a.rel = 'noopener';
-      });
-
-      return wrap.innerHTML;
-    }
-
-    async function getReadmeHTML(rawUrl){
-      if (cache.has(rawUrl)) return cache.get(rawUrl);
-      const r = await fetch(rawUrl, { credentials: 'omit' });
-      if (!r.ok) throw new Error('README fetch failed');
-      const md = await r.text();
-      const html = DOMPurify.sanitize(marked.parse(md, { mangle:false, headerIds:true }));
-      const fixed = rewriteRelatives(html, rawUrl);
-      cache.set(rawUrl, fixed);
-      return fixed;
-    }
-
-    function makeCard(){
-      const d = document.createElement('div');
-      d.className = 'hovercard';
-      d.innerHTML = `<div class="body">Carregando…</div>`;
-      return d;
-    }
-
-    function placeCard(card, anchor){
-      const rect = anchor.getBoundingClientRect();
-      const top = window.scrollY + rect.bottom + 8; // 8px abaixo do pin
-      const left = window.scrollX + rect.left + rect.width/2 - card.offsetWidth/2;
-
-      // Garante que não ultrapasse a viewport
-      const maxLeft = window.scrollX + document.documentElement.clientWidth - card.offsetWidth - 8;
-      const safeLeft = Math.max(window.scrollX + 8, Math.min(left, maxLeft));
-
-      card.style.top = `${top}px`;
-      card.style.left = `${safeLeft}px`;
-    }
-
-
-    function bind(){
-      document.querySelectorAll('.project-pin[data-readme]').forEach(anchor=>{
-        let card=null, tId=null, inside=false;
-        const open = async () => {
-          if (!card){ card = makeCard(); document.body.appendChild(card); placeCard(card, anchor); }
-          try{
-            const html = await getReadmeHTML(anchor.dataset.readme);
-            card.querySelector('.body').innerHTML = html;
-            placeCard(card, anchor);
-          }catch{
-            card.querySelector('.body').innerHTML = `<p style="color:var(--muted)">Prévia indisponível.</p>`;
-          }
-        };
-        const close = () => { if(card && !inside){ card.remove(); card=null; } };
-
-        anchor.addEventListener('mouseenter', ()=>{ clearTimeout(tId); tId=setTimeout(open, 150); });
-        anchor.addEventListener('mouseleave', ()=>{ clearTimeout(tId); setTimeout(close, 120); });
-
-        document.addEventListener('mousemove', (e)=>{
-          if(!card) return;
-          inside = card.contains(e.target);
-          if(!inside && e.target!==anchor && !anchor.contains(e.target)){
-            setTimeout(()=>{ if(!inside) close(); }, 100);
-          }
-        });
-
-        ['scroll','resize'].forEach(evt=>window.addEventListener(evt, ()=>{ if(card) placeCard(card, anchor); }));
-      });
-    }
-
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
-    else bind();
-  })();
-  </script>
+  <script src="js/projects.js"></script>
 
 
 </body>
