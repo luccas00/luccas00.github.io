@@ -195,32 +195,40 @@
       display: block;
     }
 
-    /* Card full-bleed (expande para 100% da viewport, mesmo dentro do .container) */
+    /* Navbar full-bleed mais fina + gap inferior de 1cm */
     .card.navbar{
       position: relative;
       left: 50%;
       right: 50%;
       margin-left: -50vw;
       margin-right: -50vw;
-      width: 100vw;            /* ocupa toda a largura */
+      width: 100vw;
+      padding: 8px 12px;      /* antes 24px — deixa mais fina */
+      margin-bottom: 1cm;     /* gap solicitado abaixo da seção */
     }
 
-    /* Força 1 linha e centraliza os botões */
+    /* 1 linha, centralizado, com rolagem horizontal se faltar espaço */
     .card.navbar .cta-grid{
-      grid-template-columns: none;   /* ignora regra padrão */
-      grid-auto-flow: column;        /* itens fluem na horizontal */
+      grid-template-columns: none;
+      grid-auto-flow: column;
       grid-auto-columns: max-content;
       justify-content: center;
       align-items: center;
-      overflow-x: auto;              /* safety em telas estreitas */
       gap: 12px;
+      overflow-x: auto;
     }
 
-    /* Ícone menor só para este menu (não impacta outros .btn.with-icon) */
+    /* Botões mais compactos na navbar (sem afetar os demais .btn) */
+    .card.navbar .btn{
+      padding: 8px 12px;
+    }
+
+    /* Tamanho dos ícones na navbar (garantido) */
     .card.navbar .btn .icon{
       width: 20px;
       height: 20px;
       display: block;
+      fill: currentColor;  /* usa a cor do texto do botão */
     }
 
     /* força 2 colunas e centragem perfeita */
@@ -245,11 +253,14 @@
   <main class="container">
 
     <section class="card navbar">
-      <div class="cta-grid">
+      <div class="cta-grid" role="navigation" aria-label="Navegação principal">
         <a class="btn" href="#projetos">Projetos</a>
 
         <a class="btn with-icon" href="https://www.linkedin.com/in/luccas-carneiro-678689171/" target="_blank" rel="noopener">
-          <img class="icon" src="https://cdn.simpleicons.org/linkedin/ffffff" alt="LinkedIn">
+          <!-- LinkedIn (mono) -->
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003zM6.876 20.452H3.793V9h3.083v11.452zM5.337 7.433a2.062 2.062 0 110-4.124 2.062 2.062 0 010 4.124zM20.447 20.452h-3.554v-5.569c0-1.327-.027-3.038-1.852-3.038-1.853 0-2.135 1.445-2.135 2.94v5.667H9.351V9h3.414v1.561h.049c.476-.9 1.637-1.852 3.372-1.852 3.605 0 4.268 2.372 4.268 5.456v6.287z"/>
+          </svg>
           <span>LinkedIn</span>
         </a>
 
@@ -258,11 +269,15 @@
         <a class="btn" href="#formacoes">Formações</a>
 
         <a class="btn with-icon" href="https://learn.microsoft.com/pt-br/users/luccascarneiro-1661/credentials" target="_blank" rel="noopener">
-          <img class="icon" src="https://cdn.simpleicons.org/microsoft/ffffff" alt="Microsoft">
+          <!-- Microsoft (mono) -->
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M0 3.449h10.49v10.49H0V3.45zm13.51 0H24v10.49H13.51V3.45zM0 16.96h10.49V24H0v-7.04zm13.51 0H24V24H13.51v-7.04z"/>
+          </svg>
           <span>Microsoft Learn</span>
         </a>
       </div>
     </section>
+
 
 
     <section class="card hero">
