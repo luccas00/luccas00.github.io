@@ -5,5 +5,11 @@
   "resume": "Resume",
   "helloThere": "Hello there, I'm Luccas",
   "githubStats": "GitHub Stats",
-  "projects": "Projects"
+  "projects": "Projects",
+  "skills": "Skills",
+  "experience": "I have experience",
+  "familiar": "I'm familiar with",
+  "connect": "Connect with me",
+  "repo": "Highlighted Repositories",
+  "contributions": "Contributions"
 }
