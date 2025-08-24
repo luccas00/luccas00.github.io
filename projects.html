@@ -44,6 +44,23 @@
       margin-bottom:12px;
     }
 
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.4rem;       /* maior que o texto padrão */
+      font-weight: 600;
+      color: var(--text);
+      margin-right: auto;      /* garante alinhamento à esquerda */
+    }
+
+    .section-title .icon {
+      width: 28px;             /* maior que o do card normal */
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+
     /* Pin centralizado */
     .project-pin{
       display:block;
@@ -106,11 +123,15 @@
     <!-- Header da página -->
     <section class="card">
       <div class="title-actions">
-        <img class="icon" src="/images/development-web-development-svgrepo-com.svg">
-          <span> Projects</span>
+        <div class="section-title">
+          <img class="icon" src="/images/development-web-development-svgrepo-com.svg" alt="Projects">
+          <span>Projects</span>
+        </div>
         <a class="btn" href="/" rel="noopener">Home</a>
       </div>
     </section>
+
+
 
     <!-- Chat_TCP -->
     <section class="card">
