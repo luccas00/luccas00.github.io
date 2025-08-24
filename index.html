@@ -195,6 +195,34 @@
       display: block;
     }
 
+    /* Card full-bleed (expande para 100% da viewport, mesmo dentro do .container) */
+    .card.navbar{
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      width: 100vw;            /* ocupa toda a largura */
+    }
+
+    /* Força 1 linha e centraliza os botões */
+    .card.navbar .cta-grid{
+      grid-template-columns: none;   /* ignora regra padrão */
+      grid-auto-flow: column;        /* itens fluem na horizontal */
+      grid-auto-columns: max-content;
+      justify-content: center;
+      align-items: center;
+      overflow-x: auto;              /* safety em telas estreitas */
+      gap: 12px;
+    }
+
+    /* Ícone menor só para este menu (não impacta outros .btn.with-icon) */
+    .card.navbar .btn .icon{
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+
 
   </style>
 </head>
@@ -208,16 +236,26 @@
 
   <main class="container">
 
-    <section class="card">
+    <section class="card navbar">
       <div class="cta-grid">
         <a class="btn" href="#projetos">Projetos</a>
-        <a class="btn" href="https://www.linkedin.com/in/luccas-carneiro-678689171/" target="_blank" rel="noopener">LinkedIn</a>
+
+        <a class="btn with-icon" href="https://www.linkedin.com/in/luccas-carneiro-678689171/" target="_blank" rel="noopener">
+          <img class="icon" src="https://cdn.simpleicons.org/linkedin/ffffff" alt="LinkedIn">
+          <span>LinkedIn</span>
+        </a>
+
         <a class="btn" href="/resume.pdf" target="_blank" rel="noopener">Currículo (PDF)</a>
         <a class="btn" href="#certificacoes">Certificações</a>
         <a class="btn" href="#formacoes">Formações</a>
-        <a class="btn" href="https://learn.microsoft.com/pt-br/users/luccascarneiro-1661/credentials" target="_blank" rel="noopener">Microsoft Learn</a>
+
+        <a class="btn with-icon" href="https://learn.microsoft.com/pt-br/users/luccascarneiro-1661/credentials" target="_blank" rel="noopener">
+          <img class="icon" src="https://cdn.simpleicons.org/microsoft/ffffff" alt="Microsoft">
+          <span>Microsoft Learn</span>
+        </a>
       </div>
     </section>
+
 
     <section class="card hero">
       <!-- Primeira Linha (Foto + Títulos) -->
