@@ -680,17 +680,15 @@
   })();
   </script>
 
+
 <script>
 (function(){
   const THEME_KEY = 'theme';
-  const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-  const saved = localStorage.getItem(THEME_KEY);
-  let theme = (saved === 'light' || saved === 'dark') ? saved : (prefersLight ? 'light' : 'dark');
+  let theme = (localStorage.getItem(THEME_KEY) === 'light') ? 'light' : 'dark'; // default: dark
 
   applyTheme(theme);
   syncToggle(theme);
 
-  // Click handler
   document.addEventListener('click', (e)=>{
     const btn = e.target.closest('.theme-opt');
     if(!btn) return;
@@ -711,12 +709,13 @@
   function syncToggle(t){
     document.querySelectorAll('.theme-opt').forEach(b=>{
       const active = b.dataset.theme === t;
-      b.classList.toggle('is-active', active);          // reaproveita seu estilo .lang-opt.is-active
+      b.classList.toggle('is-active', active);
       b.setAttribute('aria-pressed', String(active));
     });
   }
 })();
 </script>
+
 
 
 
