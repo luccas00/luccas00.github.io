@@ -1,6 +1,3 @@
-
-
-
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -10,7 +7,6 @@
   <meta name="description" content="Projects of Luccas Carneiro (EN/PT-BR).">
   <link rel="icon" type="image/png" href="https://github.com/luccas00.png">
 
-  <!-- Reuso do seu design system -->
   <style>
     :root{
       --bg:#0b0c10; --card:#121317; --text:#e6e6e6; --muted:#b3b3b3;
@@ -23,120 +19,131 @@
     body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text)}
     a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
     .container{max-width:980px;margin:0 auto;padding:24px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;margin:16px 0}
-    h1,h2{margin:0 0 12px;line-height:1.25}
+
+    /* Cards com mais gap vertical */
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:24px;
+      margin:64px 0;                /* antes 16px -> mais respiro */
+    }
+
+    h1,h2,h3{margin:0 0 12px;line-height:1.25}
     .btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 14px;border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:10px;font-weight:600;text-decoration:none;gap:8px;transition:transform .06s ease,border-color .2s,background .2s}
     .btn:hover{border-color:var(--accent);transform:translateY(-1px)}
     .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
     .title-actions{display:flex;align-items:center;gap:12px}
     .title-actions .actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
-    /* Viewer */
-    .pdf-wrap{margin-top:16px}
-    .pdf-frame{width:100%; height:80vh; border:1px solid var(--border); border-radius:12px; background:#000; display:block}
-    .fallback{background:var(--badge-bg);border:1px dashed var(--border);border-radius:12px;padding:16px;color:var(--muted);text-align:center}
+
+    /* Título alinhado à direita */
+    .section-header{
+      display:flex;
+      justify-content:flex-start;   /* empurra o título para a esquerda */
+      align-items:center;
+      margin-bottom:12px;
+    }
+
+    /* Pin centralizado */
+    .project-pin{
+      display:block;
+      width:fit-content;          /* shrink-to-content */
+      margin:0 auto 12px;         /* centraliza horizontalmente */
+    }
+    .project-pin img{
+      display:block;
+      width:100%;
+      height:auto;
+      border-radius:12px;
+      border:1px solid var(--border);
+    }
+
+    /* Meta/descrição */
+    .project-meta{ color: var(--muted); font-size:.95rem; text-align:center; }
+    .project-body{ max-width:720px; margin:0 auto; text-align:center; }
   </style>
 </head>
 <body>
 
-    <!-- Background Matrix -->
+  <!-- Background Matrix -->
   <iframe src="https://rezmason.github.io/matrix/?version=trinity&skipIntro=false&fps=32&fallSpeed=0.20"
-    frameborder="0" scrolling="no" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1;">
-  </iframe>
+    frameborder="0" scrolling="no"
+    style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1;"></iframe>
 
   <main class="container">
 
+    <!-- Header da página -->
     <section class="card">
       <div class="title-actions">
-        <h1>Projects</h1>
+        <img class="icon" src="/images/development-web-development-svgrepo-com.svg" alt="Projects">
         <div class="actions">
           <a class="btn" href="/" rel="noopener">Home</a>
         </div>
       </div>
     </section>
 
+    <!-- Chat_TCP -->
     <section class="card">
-      <div class="title-actions">
-        <h1>Chat TCP</h1>
-          <article class="card project-card">
-          <a class="project-pin" href="https://github.com/luccas00/Investments" target="_blank" rel="noopener">
-            <img alt="Investments pin" loading="lazy"
-                src="https://github-readme-stats-luccas00s-projects.vercel.app/api/pin/?username=luccas00&theme=tokyonight&repo=Investments">
-          </a>
-          <div>
-            <h3 style="margin-bottom:6px;">Investments</h3>
-            <div class="project-meta">Stack: .NET · SQL Server · Charts • Status: In Progress</div>
-            <p style="margin:8px 0 12px;">
-              Portfolio tracking sandbox: CRUD, reporting, and data visualization for personal finance experiments.
-            </p>
-          </div>
-        </article>
+      <div class="section-header">
+        <h2>Chat_TCP</h2>
+      </div>
+
+      <a class="project-pin" href="https://github.com/luccas00/Chat_TCP" target="_blank" rel="noopener">
+        <img alt="Chat_TCP pin" loading="lazy"
+             src="https://github-readme-stats-luccas00s-projects.vercel.app/api/pin/?username=luccas00&theme=tokyonight&repo=Chat_TCP">
+      </a>
+
+      <div class="project-body">
+        <div class="project-meta">Stack: Java · Sockets · Networking • Status: Completed (Academic)</div>
+        <p>TCP chat application com sockets, broadcast de mensagens e padrões básicos de concorrência.</p>
       </div>
     </section>
 
+    <!-- WEB_II -->
     <section class="card">
-      <div class="title-actions">
-        <h1>Web II</h1>
-        <article class="card project-card">
-          <a class="project-pin" href="https://github.com/luccas00/WEB_II" target="_blank" rel="noopener">
-            <img alt="WEB_II pin" loading="lazy"
-                src="https://github-readme-stats-luccas00s-projects.vercel.app/api/pin/?username=luccas00&theme=tokyonight&repo=WEB_II">
-          </a>
-          <div>
-            <h3 style="margin-bottom:6px;">Chat_TCP</h3>
-            <div class="project-meta">Stack: Java · Sockets · Networking • Status: Completed (Academic)</div>
-            <p style="margin:8px 0 12px;">
-              TCP chat application focusing on sockets, message broadcasting and basic concurrency patterns.
-            </p>
-          </div>
-        </article>
+      <div class="section-header">
+        <h2>WEB_II</h2>
+      </div>
+
+      <a class="project-pin" href="https://github.com/luccas00/WEB_II" target="_blank" rel="noopener">
+        <img alt="WEB_II pin" loading="lazy"
+             src="https://github-readme-stats-luccas00s-projects.vercel.app/api/pin/?username=luccas00&theme=tokyonight&repo=WEB_II">
+      </a>
+
+      <div class="project-body">
+        <div class="project-meta">Stack: HTML · CSS · JS • Status: Academic</div>
+        <p>Repositório de coursework com exercícios front-end e padrões de componentes.</p>
       </div>
     </section>
 
+    <!-- Investments -->
     <section class="card">
-      <div class="title-actions">
-        <h1>Investments</h1>
-        <article class="card project-card">
-        <a class="project-pin" href="https://github.com/luccas00/Investments" target="_blank" rel="noopener">
-          <img alt="Investments pin" loading="lazy"
-              src="https://github-readme-stats-luccas00s-projects.vercel.app/api/pin/?username=luccas00&theme=tokyonight&repo=Investments">
-        </a>
-        <div>
-          <h3 style="margin-bottom:6px;">WEB_II</h3>
-          <div class="project-meta">Stack: HTML · CSS · JS • Status: Academic</div>
-          <p style="margin:8px 0 12px;">
-            Coursework repository with front-end exercises and component patterns.
-          </p>
-        </div>
-      </article>
+      <div class="section-header">
+        <h2>Investments</h2>
+      </div>
+
+      <a class="project-pin" href="https://github.com/luccas00/Investments" target="_blank" rel="noopener">
+        <img alt="Investments pin" loading="lazy"
+             src="https://github-readme-stats-luccas00s-projects.vercel.app/api/pin/?username=luccas00&theme=tokyonight&repo=Investments">
+      </a>
+
+      <div class="project-body">
+        <div class="project-meta">Stack: .NET · SQL Server · Charts • Status: In Progress</div>
+        <p>Sandbox de portfolio tracking: CRUD, relatórios e visualização de dados para finanças pessoais.</p>
       </div>
     </section>
-
-
-      <!-- Exemplo (Investments) -->
-
-
-      <!-- Exemplo (WEB_II) -->
-      
-
-    </div>
-  </section>
-
 
     <footer class="container" style="text-align:center;color:var(--muted);font-size:.9rem">
       <p>© <span id="y"></span> Luccas Carneiro — Power Platform & Dynamics 365</p>
-      <p style="font-size: 0.8em; color: var(--muted);">
-        Background Matrix effect by <a href="https://github.com/rezmason/matrix" target="_blank"
-          rel="noopener">Rezmason</a> — Licensed under MIT.
+      <p style="font-size:.8em;color:var(--muted);">
+        Background Matrix effect by <a href="https://github.com/rezmason/matrix" target="_blank" rel="noopener">Rezmason</a> — MIT License.
       </p>
     </footer>
   </main>
 
   <script>
-    // Ano
     const y = document.getElementById('y');
     if (y) y.textContent = new Date().getFullYear();
-
   </script>
-
 </body>
 </html>
