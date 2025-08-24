@@ -92,34 +92,7 @@
     const btnEN        = document.getElementById('btn-en');
     const btnPT        = document.getElementById('btn-pt');
 
-    let current = 'en';
-
     function buildUrl(file){ return file + VIEW_OPTS; }
-
-    function switchTo(lang){
-      current = (lang === 'pt') ? 'pt' : 'en';
-      const file = files[current] || files.en;
-
-      // Atualiza iframe
-      frame.src = buildUrl(file);
-
-      // Atualiza download (forçando salvar ao invés de abrir)
-      downloadBtn.href = file;
-      downloadBtn.setAttribute(
-        'download',
-        current === 'pt' ? 'Luccas-Carneiro-Curriculo-PT.pdf' : 'Luccas-Carneiro-Resume-EN.pdf'
-      );
-
-      // Fallback link
-      if (fallbackLink) fallbackLink.href = file;
-
-      // Estado visual dos botões
-      btnEN.classList.toggle('primary', current === 'en');
-      btnPT.classList.toggle('primary', current === 'pt');
-    }
-
-    btnEN.addEventListener('click', () => switchTo('en'));
-    btnPT.addEventListener('click', () => switchTo('pt'));
 
     // Fallback simples se o iframe falhar
     frame.addEventListener('error', () => {
@@ -127,8 +100,6 @@
       if (fallback) fallback.style.display = 'block';
     });
 
-    // Primeira renderização
-    switchTo('en');
   </script>
 
 </body>
