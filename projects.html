@@ -83,6 +83,15 @@
       margin-left:auto; /* ancora o botão à direita */
     }
 
+    .hovercard{
+      position:absolute; z-index:50; max-width:640px; width:min(90vw,640px);
+      background:var(--card); color:var(--text); border:1px solid var(--border);
+      border-radius:12px; box-shadow:0 12px 30px rgba(0,0,0,.35);
+      padding:16px; overflow:hidden;
+    }
+    .hovercard .body{ max-height:360px; overflow:auto; }
+    .project-pin{ position:relative; }
+
   </style>
 </head>
 <body>
@@ -109,9 +118,11 @@
         <h2>Chat_TCP</h2>
       </div>
 
-      <a class="project-pin" href="https://github.com/luccas00/Chat_TCP" target="_blank" rel="noopener">
+      <a class="project-pin"
+        data-readme="https://raw.githubusercontent.com/luccas00/Chat_TCP/HEAD/README.md"
+        href="https://github.com/luccas00/Chat_TCP" target="_blank" rel="noopener">
         <img alt="Chat_TCP pin" loading="lazy"
-             src="https://github-readme-stats-luccas00s-projects.vercel.app/api/pin/?username=luccas00&theme=tokyonight&repo=Chat_TCP">
+            src="https://github-readme-stats-luccas00s-projects.vercel.app/api/pin/?username=luccas00&theme=tokyonight&repo=Chat_TCP">
       </a>
 
       <div class="project-body">
@@ -143,10 +154,10 @@
         <h2>Investments</h2>
       </div>
 
-      <a class="project-pin" href="https://github.com/luccas00/Investments" target="_blank" rel="noopener">
-        <img alt="Investments pin" loading="lazy"
-             src="https://github-readme-stats-luccas00s-projects.vercel.app/api/pin/?username=luccas00&theme=tokyonight&repo=Investments">
-      </a>
+      <a class="project-pin"
+        data-readme="https://raw.githubusercontent.com/luccas00/Investments/HEAD/README.md"
+        href="https://github.com/luccas00/Investments" target="_blank" rel="noopener">...</a>
+
 
       <div class="project-body">
         <div class="project-meta">Stack: .NET · SQL Server · Charts • Status: In Progress</div>
@@ -166,5 +177,112 @@
     const y = document.getElementById('y');
     if (y) y.textContent = new Date().getFullYear();
   </script>
+
+  <!-- 1) Dependências -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+
+  <!-- 2) Seu script -->
+  <script>
+  (() => {
+    const cache = new Map(); // url -> html
+
+    function parseRepo(rawUrl){
+      const m = rawUrl.match(/^https:\/\/raw\.githubusercontent\.com\/([^\/]+)\/([^\/]+)\/([^\/]+)\//i);
+      if(!m) return null;
+      return { owner:m[1], repo:m[2], ref:m[3] };
+    }
+
+    function rewriteRelatives(html, rawUrl){
+      const meta = parseRepo(rawUrl); if(!meta) return html;
+      const baseRaw = `https://raw.githubusercontent.com/${meta.owner}/${meta.repo}/${meta.ref}/`;
+      const baseWeb = `https://github.com/${meta.owner}/${meta.repo}/`;
+      const wrap = document.createElement('div'); wrap.innerHTML = html;
+
+      wrap.querySelectorAll('img').forEach(img=>{
+        const src = img.getAttribute('src') || '';
+        if (!/^https?:\/\//i.test(src) && !src.startsWith('data:')) {
+          img.src = new URL(src, baseRaw).href;
+        }
+        img.loading = 'lazy';
+        img.style.maxWidth = '100%';
+        img.referrerPolicy = 'no-referrer';
+      });
+
+      wrap.querySelectorAll('a').forEach(a=>{
+        const href = a.getAttribute('href') || '';
+        if (!/^https?:\/\//i.test(href) && !href.startsWith('#') && href!=='') {
+          a.href = new URL(href, baseWeb).href;
+        }
+        a.target = '_blank'; a.rel = 'noopener';
+      });
+
+      return wrap.innerHTML;
+    }
+
+    async function getReadmeHTML(rawUrl){
+      if (cache.has(rawUrl)) return cache.get(rawUrl);
+      const r = await fetch(rawUrl, { credentials: 'omit' });
+      if (!r.ok) throw new Error('README fetch failed');
+      const md = await r.text();
+      const html = DOMPurify.sanitize(marked.parse(md, { mangle:false, headerIds:true }));
+      const fixed = rewriteRelatives(html, rawUrl);
+      cache.set(rawUrl, fixed);
+      return fixed;
+    }
+
+    function makeCard(){
+      const d = document.createElement('div');
+      d.className = 'hovercard';
+      d.innerHTML = `<div class="body">Carregando…</div>`;
+      return d;
+    }
+
+    function placeCard(card, anchor){
+      const rect = anchor.getBoundingClientRect();
+      const top = window.scrollY + rect.bottom + 8;
+      const left = Math.min(
+        window.scrollX + rect.left,
+        window.scrollX + document.documentElement.clientWidth - card.offsetWidth - 8
+      );
+      card.style.top = `${top}px`;
+      card.style.left = `${left}px`;
+    }
+
+    function bind(){
+      document.querySelectorAll('.project-pin[data-readme]').forEach(anchor=>{
+        let card=null, tId=null, inside=false;
+        const open = async () => {
+          if (!card){ card = makeCard(); document.body.appendChild(card); placeCard(card, anchor); }
+          try{
+            const html = await getReadmeHTML(anchor.dataset.readme);
+            card.querySelector('.body').innerHTML = html;
+            placeCard(card, anchor);
+          }catch{
+            card.querySelector('.body').innerHTML = `<p style="color:var(--muted)">Prévia indisponível.</p>`;
+          }
+        };
+        const close = () => { if(card && !inside){ card.remove(); card=null; } };
+
+        anchor.addEventListener('mouseenter', ()=>{ clearTimeout(tId); tId=setTimeout(open, 150); });
+        anchor.addEventListener('mouseleave', ()=>{ clearTimeout(tId); setTimeout(close, 120); });
+
+        document.addEventListener('mousemove', (e)=>{
+          if(!card) return;
+          inside = card.contains(e.target);
+          if(!inside && e.target!==anchor && !anchor.contains(e.target)){
+            setTimeout(()=>{ if(!inside) close(); }, 100);
+          }
+        });
+
+        ['scroll','resize'].forEach(evt=>window.addEventListener(evt, ()=>{ if(card) placeCard(card, anchor); }));
+      });
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
+    else bind();
+  })();
+  </script>
+
 </body>
 </html>
