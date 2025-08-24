@@ -255,6 +255,18 @@
     align-items: center !important;
   }
 
+  .lang-switch{
+    display:inline-flex; border:1px solid var(--border); border-radius:12px; overflow:hidden;
+    background:var(--card);
+  }
+  .lang-opt{
+    padding:6px 12px; font-weight:600; border:0; background:transparent; color:var(--text);
+    cursor:pointer; transition:background .2s, color .2s;
+  }
+  .lang-opt + .lang-opt{ border-left:1px solid var(--border); }
+  .lang-opt.is-active{ background:var(--accent); color:#fff; }
+  .lang-opt:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
 
 
   </style>
@@ -301,9 +313,11 @@
           <img class="icon" src="/images/curriculum-information-svgrepo-com.svg" alt="" aria-hidden="true">
           <span data-i18n="resume">Resume</span>
         </a>
-
-            <!-- Toggle de idioma -->
-        <button id="lang-toggle" type="button" aria-label="Change language">EN</button>
+            
+        <div class="lang-switch" role="group" aria-label="Selecionar idioma">
+          <button class="lang-opt" data-lang="pt-BR" type="button" aria-pressed="false">PT</button>
+          <button class="lang-opt" data-lang="en-US" type="button" aria-pressed="false">EN</button>
+        </div>
 
       </div>
     </section>
@@ -568,6 +582,37 @@
     }
   })();
   </script>
+
+  <script>
+  (function(){
+    const SUPPORTED = ['pt-BR','en-US'];
+    const stored = localStorage.getItem('lang');
+    const lang = (stored && SUPPORTED.includes(stored)) ? stored
+                : ((navigator.language||'').toLowerCase().startsWith('pt') ? 'pt-BR' : 'en-US');
+
+    // Marcar ativo no toggle
+    document.querySelectorAll('.lang-opt').forEach(btn=>{
+      const isActive = btn.dataset.lang === lang;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
+    });
+
+    // Handler de troca
+    document.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.lang-opt');
+      if(!btn) return;
+      const newLang = btn.dataset.lang;
+      if(!SUPPORTED.includes(newLang)) return;
+      if(newLang === localStorage.getItem('lang')) return;
+
+      localStorage.setItem('lang', newLang);
+      const u = new URL(location.href);
+      u.searchParams.set('lang', newLang);
+      location.href = u.toString(); // refresh para aplicar em todas as páginas
+    });
+  })();
+  </script>
+
 
 </body>
 
