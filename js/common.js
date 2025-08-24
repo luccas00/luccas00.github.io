@@ -94,10 +94,17 @@
 
 // Matrix background toggle
 (function(){
-  const iframe = document.getElementById('matrix-bg');
   const btn = document.getElementById('toggle-matrix');
-  if(!iframe || !btn) return;
-  let active = true;
+  // tenta pelo id; se não achar, tenta por data-attr ou pelo src
+  const iframe =
+    document.getElementById('matrix-bg') ||
+    document.querySelector('iframe[data-matrix-bg], iframe[src*="rezmason.github.io/matrix"]');
+
+  if(!btn || !iframe) return;
+
+  // estado inicial a partir do display atual
+  let active = iframe.style.display !== 'none';
+
   btn.addEventListener('click', ()=>{
     active = !active;
     iframe.style.display = active ? 'block' : 'none';
