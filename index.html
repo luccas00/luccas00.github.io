@@ -599,7 +599,7 @@
 
     // --- Handlers ---
     document.addEventListener('click', (e)=>{
-      const btn = e.target.closest('.lang-opt');
+      const btn = e.target.closest('.lang-switch .lang-opt');
       if(!btn) return;
       const newLang = btn.dataset.lang;
       if(!SUPPORTED.includes(newLang) || newLang === lang) return;
@@ -608,8 +608,8 @@
       persistLang(lang);
       setHtmlLang(lang);
       syncToggleUI(lang);
-      updateUrlParam(lang);   // mantém deep-link
-      loadAndApply(lang);     // *** aplica sem reload ***
+      updateUrlParam(lang);
+      loadAndApply(lang);
     });
 
     // --- Funções utilitárias ---
@@ -633,7 +633,7 @@
     }
 
     function syncToggleUI(l){
-      document.querySelectorAll('.lang-opt').forEach(btn=>{
+      document.querySelectorAll('.lang-switch .lang-opt').forEach(btn=>{
         const active = btn.dataset.lang === l;
         btn.classList.toggle('is-active', active);
         btn.setAttribute('aria-pressed', String(active));
@@ -701,6 +701,8 @@
 
   applyTheme(theme);
   syncToggle(theme);
+
+  window.addEventListener('i18n:applied', ()=> syncToggle(theme));
 
   document.addEventListener('click', (e)=>{
     const btn = e.target.closest('.theme-opt');
