@@ -220,9 +220,24 @@
     }
 
     /* Botões um pouco mais compactos só na navbar */
-    .card.navbar .btn{
-      padding: 8px 12px;
+    /* HOTFIX hover na navbar: remove o jump e garante contorno 360° */
+    .card.navbar .btn { position: relative; }
+
+    .card.navbar .btn:hover {
+      transform: none;                   /* remove o -1px que causava o corte */
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent) inset;  /* “borda” azul por dentro */
     }
+
+    /* Opcional: se quiser um leve glow também por fora */
+    .card.navbar .btn:hover::after {
+      content: "";
+      position: absolute; inset: 0;
+      border-radius: 10px;
+      box-shadow: 0 0 6px var(--accent);
+      pointer-events: none;
+    }
+
 
     /* Ícones na navbar */
     .card.navbar .btn .icon{
