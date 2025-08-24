@@ -456,7 +456,7 @@
     }
 
     #myCard {
-      max-width: 700px;   /* menor que os 980px globais */
+      max-width: 600px;   /* menor que os 980px globais */
       margin: 0 auto;     /* centraliza horizontalmente */
     }
 
