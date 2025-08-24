@@ -196,47 +196,47 @@
     }
 
     /* Navbar full-bleed mais fina + gap inferior de 1cm */
-    .card.navbar{
-      position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: 2cm;
-      margin-right: 2cm;
-      width: 100vw;
-      padding: 8px 12px;      /* antes 24px — deixa mais fina */
-      margin-bottom: 1cm;     /* gap solicitado abaixo da seção */
-    }
+  .card.navbar{
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    width: 100vw;
+    padding: 8px 12px;      /* antes 24px — deixa mais fina */
+    margin-bottom: 1cm;     /* gap solicitado abaixo da seção */
+  }
 
-    /* 1 linha, centralizado, com rolagem horizontal se faltar espaço */
-    .card.navbar .cta-grid{
-      grid-template-columns: none;
-      grid-auto-flow: column;
-      grid-auto-columns: max-content;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      overflow-x: auto;
-    }
+  /* 1 linha, centralizado, com rolagem horizontal se faltar espaço */
+  .card.navbar .cta-grid{
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    overflow-x: auto;
+  }
 
-    /* Botões mais compactos na navbar (sem afetar os demais .btn) */
-    .card.navbar .btn{
-      padding: 8px 12px;
-    }
+  /* Botões mais compactos na navbar (sem afetar os demais .btn) */
+  .card.navbar .btn{
+    padding: 8px 12px;
+  }
 
-    /* Tamanho dos ícones na navbar (garantido) */
-    .card.navbar .btn .icon{
-      width: 20px;
-      height: 16px;
-      display: block;
-      fill: currentColor;  /* usa a cor do texto do botão */
-    }
+  /* Tamanho dos ícones na navbar (garantido) */
+  .card.navbar .btn .icon{
+    width: 20px;
+    height: 16px;
+    display: block;
+    fill: currentColor;  /* usa a cor do texto do botão */
+  }
 
     /* força 2 colunas e centragem perfeita */
-    .stats {
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      justify-items: center !important;
-      align-items: center !important;
-    }
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    justify-items: center !important;
+    align-items: center !important;
+  }
 
 
 
