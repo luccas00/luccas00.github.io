@@ -180,6 +180,53 @@ footer{ color:var(--muted); font-size:.9rem; margin-top:24px }
 }
 .matrix-toggle button:hover{ border-color:var(--accent); background:var(--accent); color:#fff }
 
+
+
+
+/* HERO – 1ª linha: segurar largura do texto na caixa */
+.hero > div:first-child{
+  /* sobrescreve o inline grid-template-columns do seu HTML */
+  grid-template-columns: 200px minmax(0, 1fr) !important;
+}
+
+/* Evitar clipping e permitir quebra */
+.hero .title-actions{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;       /* permite quebrar ao lado do avatar */
+}
+.hero .title-actions h1{
+  margin: 0;
+  line-height: 1.2;
+  max-width: 100%;
+  overflow-wrap: anywhere;  /* quebra palavras longas se preciso */
+}
+.hero .title-actions .btn{
+  margin-left: auto;     /* fica à direita no desktop */
+  flex-shrink: 0;        /* não “aperta” o botão */
+}
+
+/* Garante que elementos de texto não forcem overflow */
+.hero .intro-main,
+.hero :is(h1,h2,p,span){
+  min-width: 0;
+}
+
+/* Se ainda “empurrar” em telas estreitas, empilha abaixo de 768px */
+@media (max-width: 768px){
+  .hero > div:first-child{
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+  .hero .title-actions{
+    justify-content: center;
+  }
+  .hero .title-actions .btn{
+    margin-left: 0;      /* não empurra no mobile */
+  }
+}
+
 /* Mobile: empilha switches e reduz largura da navbar */
 @media (max-width:560px){
   .card.navbar{ width:90vw; padding-left:12px; padding-right:12px }
@@ -188,4 +235,3 @@ footer{ color:var(--muted); font-size:.9rem; margin-top:24px }
     position:static; transform:none; margin:6px auto 0;
   }
 }
-
