@@ -204,6 +204,15 @@
       max-width: 1200px;           /* opcional: trava largura máxima */
       padding: 8px 12px;           /* mais fina verticalmente */
       margin-bottom: 1cm;          /* gap até o resto da página */
+        }
+
+    .card.navbar .lang-switch{
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: 0;           /* zera qualquer empurrão lateral */
+      z-index: 1;          /* garante clique acima de eventuais overflows */
     }
 
     /* 1 linha, centralizado, com fallback de rolagem se necessário */
