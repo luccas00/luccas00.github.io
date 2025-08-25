@@ -29,6 +29,7 @@
   "cert.viewCredential": "View credential",
   "cert.downloadPdf": "Download PDF",
   "cert.title.pl200": "Microsoft - Power Platform Functional Consultant Associate",
+  "cert.title.pl900": "Microsoft - Power Platform Fundamentals",
   "cert.title.dotnet": "DIO - .NET Developer Training",
   "cert.title.crm": "DIO - CRM Dynamics 365 Developer Training"
 }
