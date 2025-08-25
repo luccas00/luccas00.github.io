@@ -85,7 +85,8 @@
     const pins = Array.from(document.querySelectorAll('.project-pin[data-readme]'));
     pins.forEach((anchor, idx) => {
       const isLast = idx === pins.length - 1;
-      const prefDir = isLast ? 'up' : 'down';
+      const prefDir = anchor.dataset.dir || (idx === pins.length - 1 ? 'up' : 'down');
+
 
       let card=null, tId=null, inside=false;
 
