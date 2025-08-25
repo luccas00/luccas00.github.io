@@ -18,5 +18,11 @@
   "about.4": "Pursuing a Bachelor's degree in Information Systems at UFOP (Federal University of Ouro Preto)",
   "about.0": "I'm a Power Platform and Dynamics 365 Developer!!",
   "about.job": "Senior Developer",
-  "about.jobDescription": " | Specialist in Power Platform & Dynamics 365 | Certified Power Platform Functional Consultant [PL-200] | Business Solutions Expert"
+  "about.jobDescription": " | Specialist in Power Platform & Dynamics 365 | Certified Power Platform Functional Consultant [PL-200] | Business Solutions Expert",
+  "proj.chat_tcp.stack": "Stack: Java Spring Boot · .NET WinForms & Avalonia · Sockets · Networking • Status: Completed (Academic)",
+  "proj.chat_tcp.desc": "TCP client/server system with Automatic Server Discovery (UDP), broadcast and private messages, TCP admin, cross-platform GUI clients, plus extra integrations via Java REST API and a React web app.",
+  "proj.web_ii.stack": "Stack: Java Spring Boot · PostgreSQL · React • Status: Completed (Academic)",
+  "proj.web_ii.desc": "This repository contains the Sales and Users microservices, the Notification Application, and the React Frontend that together compose the Ticket Management application.",
+  "proj.investments.stack": "Stack: Java Spring Boot · PostgreSQL · React • Status: Completed (Academic)",
+  "proj.investments.desc": "Microservice for managing portfolios and investment assets. The solution consists of an Investments API in Spring Boot, a routing gateway, a service discovery component, and a React frontend."
 }
