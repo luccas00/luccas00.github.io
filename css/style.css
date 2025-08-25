@@ -305,3 +305,12 @@ footer{ color:var(--muted); font-size:.9rem; margin-top:24px }
     flex:1 1 100%;
   }
 }
+
+/* Hover diferenciado para o último card da página Projects */
+main .card:last-of-type{
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+main .card:last-of-type:hover{
+  transform: translateY(-6px);  /* levanta mais visível */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25); /* sombra maior */
+}
