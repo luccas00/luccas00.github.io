@@ -54,7 +54,9 @@
 
     function placeCard(card, anchor){
       const rect = anchor.getBoundingClientRect();
-      const top = window.scrollY + rect.bottom + 8; // 8px abaixo do pin
+
+      // calcula posição para cima
+      const top = window.scrollY + rect.top - card.offsetHeight - 8; // 8px acima do pin
       const left = window.scrollX + rect.left + rect.width/2 - card.offsetWidth/2;
 
       // Garante que não ultrapasse a viewport
@@ -64,6 +66,7 @@
       card.style.top = `${top}px`;
       card.style.left = `${safeLeft}px`;
     }
+
 
 
     function bind(){
