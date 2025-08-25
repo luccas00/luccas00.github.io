@@ -54,7 +54,7 @@
     return d;
   }
 
-  // direction: 'down' (default) | 'up'
+  // direction: 'down' (default) | 'up' — sem fallback
   function placeCard(card, anchor, direction='down'){
     const rect = anchor.getBoundingClientRect();
     const vpLeft = window.scrollX + 8;
@@ -66,15 +66,7 @@
     const downTop = window.scrollY + rect.bottom + 8;
     const upTop   = window.scrollY + rect.top - card.offsetHeight - 8;
 
-    // Aplica direção preferida com fallback se estourar viewport
-    let top = direction === 'up' ? upTop : downTop;
-
-    if (direction === 'up' && upTop < window.scrollY + 8) {
-      top = downTop; // sem espaço acima -> vai para baixo
-    }
-    if (direction === 'down' && (downTop + card.offsetHeight) > (window.scrollY + window.innerHeight - 8)) {
-      top = upTop;   // sem espaço abaixo -> vai para cima
-    }
+    const top = direction === 'up' ? upTop : downTop; // direção fixa, sem inversão
 
     card.style.top = `${top}px`;
     card.style.left = `${safeLeft}px`;
@@ -85,8 +77,7 @@
     const pins = Array.from(document.querySelectorAll('.project-pin[data-readme]'));
     pins.forEach((anchor, idx) => {
       const isLast = idx === pins.length - 1;
-      const prefDir = anchor.dataset.dir || (idx === pins.length - 1 ? 'up' : 'down');
-
+      const prefDir = isLast ? 'up' : 'down';
 
       let card=null, tId=null, inside=false;
 
@@ -99,7 +90,7 @@
         try{
           const html = await getReadmeHTML(anchor.dataset.readme);
           card.querySelector('.body').innerHTML = html;
-          placeCard(card, anchor, prefDir); // recalc após carregar conteúdo
+          placeCard(card, anchor, prefDir); // recalc após conteúdo
         }catch{
           card.querySelector('.body').innerHTML = `<p style="color:var(--muted)">Prévia indisponível.</p>`;
           placeCard(card, anchor, prefDir);
