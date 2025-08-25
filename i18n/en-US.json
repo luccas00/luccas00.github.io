@@ -27,5 +27,8 @@
   "proj.investments.desc": "Microservice for managing portfolios and investment assets. The solution consists of an Investments API in Spring Boot, a routing gateway, a service discovery component, and a React frontend.",
   "cert.issued": "Issued",
   "cert.viewCredential": "View credential",
-  "cert.downloadPdf": "Download PDF"
+  "cert.downloadPdf": "Download PDF",
+  "cert.title.pl200": "Microsoft - Power Platform Functional Consultant Associate",
+  "cert.title.dotnet": "DIO - .NET Developer Training",
+  "cert.title.crm": "DIO - CRM Dynamics 365 Developer Training"
 }

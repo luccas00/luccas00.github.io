@@ -27,5 +27,8 @@
   "proj.investments.desc": "Microsserviço para gerenciamento de carteiras e ativos de investimento. A solução é composta por uma API de investimentos em Spring Boot, um gateway de roteamento, um service discovery e um frontend em React.",
   "cert.issued": "Emitido",
   "cert.viewCredential": "Ver credencial",
-  "cert.downloadPdf": "Baixar PDF"
+  "cert.downloadPdf": "Baixar PDF",
+  "cert.title.pl200": "Microsoft - Consultor Funcional Associado do Power Platform",
+  "cert.title.dotnet": "DIO - Formação .NET Developer",
+  "cert.title.crm": "DIO - Formação CRM Dynamics 365 Developer"
 }
