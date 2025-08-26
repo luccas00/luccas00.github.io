@@ -28,8 +28,10 @@
   "cert.issued": "Emitido",
   "cert.viewCredential": "Ver credencial",
   "cert.downloadPdf": "Baixar PDF",
-  "cert.title.pl200": "Microsoft - Consultor Funcional Associado do Power Platform",
-  "cert.title.pl900": "Microsoft - Conceitos básicos do Power Platform",
-  "cert.title.dotnet": "DIO - Formação .NET Developer",
-  "cert.title.crm": "DIO - Formação CRM Dynamics 365 Developer"
+  "cert.title.pl200": "Consultor Funcional Associado do Power Platform",
+  "cert.title.pl900": "Conceitos básicos do Power Platform",
+  "cert.title.as1": "Criar e gerenciar aplicativos baseados em modelo com o Power Apps e o Dataverse",
+  "cert.title.as2": "Criar e gerenciar processos automatizados usando o Power Automate",
+  "cert.title.dotnet": "Formação .NET Developer",
+  "cert.title.crm": "Formação CRM Dynamics 365 Developer"
 }

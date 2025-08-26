@@ -28,8 +28,10 @@
   "cert.issued": "Issued",
   "cert.viewCredential": "View credential",
   "cert.downloadPdf": "Download PDF",
-  "cert.title.pl200": "Microsoft - Power Platform Functional Consultant Associate",
-  "cert.title.pl900": "Microsoft - Power Platform Fundamentals",
-  "cert.title.dotnet": "DIO - .NET Developer Training",
-  "cert.title.crm": "DIO - CRM Dynamics 365 Developer Training"
+  "cert.title.pl200": "Power Platform Functional Consultant Associate",
+  "cert.title.pl900": "Power Platform Fundamentals",
+  "cert.title.as1": "Create and manage model-driven apps with Power Apps and Dataverse",
+  "cert.title.as2": "Create and manage automated processes by using Power Automate",
+  "cert.title.dotnet": ".NET Developer Training",
+  "cert.title.crm": "CRM Dynamics 365 Developer Training"
 }
