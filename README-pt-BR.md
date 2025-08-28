@@ -1,18 +1,18 @@
-# Hello there, I'm Luccas :wave:
+# Olá, eu sou o Luccas :wave:
 
-## 👨🏼‍💻🎓 I'm a Power Platform & Dynamics 365 Developer!!
+## 👨🏼‍💻🎓 Sou Desenvolvedor Power Platform & Dynamics 365!!
 
-Senior Developer | Specialist in Power Platform & Dynamics 365 | Certified Power Platform Functional Consultant [PL-200] | Business Solutions Expert
+Desenvolvedor Sênior | Especialista em Power Platform & Dynamics 365 | Consultor Funcional Certificado [PL-200] | Focado em Soluções Empresariais
 
-🔭 Committed to continuously improving my development skills and problem-solving abilities, aiming to deliver efficient technological solutions.
+🔭 Comprometido com o aprimoramento contínuo das minhas habilidades de desenvolvimento e resolução de problemas, visando entregar soluções tecnológicas eficientes.
 
-🌱 Enhancing my knowledge in Microsoft Power Platform, Dynamics 365, .NET, ASP.NET MVC, Node.js, Microsoft SQL Server, and Azure to deliver integrated and scalable solutions.
+🌱 Aprimorando meus conhecimentos em Microsoft Power Platform, Dynamics 365, .NET, ASP.NET MVC, Node.js, Microsoft SQL Server e Azure, para entregar soluções integradas e escaláveis.
 
-💻 At Smart Consulting, I contribute to improving the efficiency and quality of our clients' projects. I have experience in adapting and configuring Dynamics 365 business applications, with a focus on Project Operations (project and finance operations), Customer Service (customer support), and Dynamics 365 Sales.
+💻 Na Smart Consulting, contribuo para aumentar a eficiência e a qualidade dos projetos dos nossos clientes. Tenho experiência em adaptar e configurar os aplicativos de negócio do Dynamics 365, com destaque para Project Operations (operações de projeto e finanças), Customer Service (atendimento ao cliente) e Dynamics 365 Sales (vendas).
 
-🏫 Pursuing a Bachelor's degree in Information Systems at UFOP (Federal University of Ouro Preto)
+🏫 Graduando em Sistemas de Informação pela UFOP (Universidade Federal de Ouro Preto)
 
-## 📊 GitHub Stats
+## 📊 Estatísticas do GitHub
 <p align="center">
   <a href="https://github.com/luccas00">
     <img height="180em" alt="Top Langs"
@@ -25,13 +25,13 @@ Senior Developer | Specialist in Power Platform & Dynamics 365 | Certified Power
 </p>
 
 
-## 🛠 Skills
+## 🛠 Habilidades
 
-### I have experience
+### Tenho experiência com
 
 [![My Skills](https://skillicons.dev/icons?i=vscode,visualstudio,idea,swift,c,cs,java,js,css,html,git,azure)](https://skillicons.dev)
 
-### I'm familiar with
+### Estou familiarizado com
 
 <div>
 
@@ -99,7 +99,7 @@ Senior Developer | Specialist in Power Platform & Dynamics 365 | Certified Power
 </br>
 
 
-## :iphone: Connect with me
+## :iphone: Conecte-se comigo
 <a href="https://www.linkedin.com/in/luccas-carneiro-678689171/" target="_blank">
   <img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank">
 </a>
@@ -114,7 +114,7 @@ Senior Developer | Specialist in Power Platform & Dynamics 365 | Certified Power
 <br/>
 
 
-## 🚀 Highlighted Repositories
+## 🚀 Repositórios em destaque
 <p align="center">
   <a href="https://github.com/luccas00/Chat_TCP">
     <img src="https://github-readme-stats-luccas00s-projects.vercel.app/api/pin/?username=luccas00&theme=tokyonight&repo=Chat_TCP" />
@@ -131,7 +131,7 @@ Senior Developer | Specialist in Power Platform & Dynamics 365 | Certified Power
 </p>
 
 
-## 🤝 Contributions
+## 🤝 Contribuições
 <p align="center"> <img  width="900em" src="https://github.com/luccas00/luccas00/blob/output/github-contribution-grid-snake-dark.svg" /> </p> 
 	  
 <p align="center">
@@ -142,4 +142,4 @@ Senior Developer | Specialist in Power Platform & Dynamics 365 | Certified Power
 
 <br/>
 
-<p align="center"> <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=algolia&quote=Do.%20Or%20do%20Not.%20There%20is%20no%20Try...&author=Yoda" /> </p>
+<p align="center"> <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=algolia&quote=Faça.%20Ou%20não%20faça.%20Não%20existe%20tentar...&author=Yoda" /> </p>

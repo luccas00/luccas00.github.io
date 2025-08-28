@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Luccas Carneiro — Power Platform & D365 Developer (PL-200)</title>
+  <meta name="description"
+    content="Perfil profissional de Luccas — Power Platform & Dynamics 365 Developer e Estudante de Sistemas de Informação. Desenvolvedor de soluções corporativas na Microsoft Cloud: Power Apps, Power Automate, Dataverse e Dynamics 365, com integrações .NET e Azure.">
+  <meta property="og:title" content="Luccas Carneiro — Power Platform & D365 Developer (PL-200)">
+  <meta property="og:description"
+    content="Projetos com Dynamics 365 (Project Ops, Sales, Customer Service), Power Platform e Azure. Veja cases e portfólio.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://luccas00.github.io/">
+  <link rel="icon" type="image/png" href="https://github.com/luccas00.png"
+    style="border-radius: 50%; border: 3px solid var(--border);">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .i18n-readme { display: none; }
+    .i18n-readme.active { display: block; }
+  </style>
+</head>
+
+<body style="margin:0; padding:0; overflow-x:hidden; overflow-y:auto;">
+
+  <div class="matrix-toggle">
+    <button id="toggle-matrix" type="button">Desativar Matrix</button>
+  </div>
+
+  <main class="container">
+
+    <div id="navbar"></div>
+
+    <!-- HERO, SKILLS, REPOS, etc. (seções que você já tem) -->
+    <!-- ... -->
+
+    <!-- Bloco que renderiza README.md e README.pt-BR.md -->
+    <section class="card" id="readme-mirror">
+      <div id="readme-en" class="i18n-readme" data-lang="en-US">
+        {% capture readme_en %}{% include_relative README.md %}{% endcapture %}
+        {{ readme_en | markdownify }}
+      </div>
+      <div id="readme-pt" class="i18n-readme" data-lang="pt-BR">
+        {% capture readme_pt %}{% include_relative README.pt-BR.md %}{% endcapture %}
+        {{ readme_pt | markdownify }}
+      </div>
+    </section>
+
+    <footer class="container center">
+      <p>© <span id="y"></span> Luccas Carneiro — Power Platform & Dynamics 365</p>
+      <p style="font-size: 0.8em; color: var(--muted);">
+        Background Matrix effect by <a href="https://github.com/rezmason/matrix" target="_blank"
+          rel="noopener">Rezmason</a> — Licensed under MIT.
+      </p>
+    </footer>
+
+  </main>
+  <script src="js/navbar.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/matrix.js" defer></script>
+
+  <script>
+    (function () {
+      const lang = localStorage.getItem('lang') || 'en-US';
+      toggleReadme(lang);
+
+      document.addEventListener('lang:changed', e => {
+        toggleReadme(e.detail?.lang || 'en-US');
+      });
+
+      function toggleReadme(lang) {
+        document.querySelectorAll('#readme-mirror .i18n-readme')
+          .forEach(el => el.classList.toggle('active', el.dataset.lang === lang));
+      }
+    })();
+  </script>
+</body>
+
+</html>
