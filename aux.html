@@ -1,3 +1,8 @@
+---
+layout: null
+title: "Luccas Carneiro — Power Platform & D365 Developer (PL-200)"
+---
+
 <!doctype html>
 <html lang="pt-BR">
 
@@ -31,10 +36,45 @@
 
     <div id="navbar"></div>
 
-    <!-- HERO, SKILLS, REPOS, etc. (seções que você já tem) -->
-    <!-- ... -->
+    <!-- ==== SEÇÕES EXISTENTES (HERO) ==== -->
+    <section class="card hero">
+      <div style="display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: center;">
+        <div class="center">
+          <a href="https://github.com/luccas00" target="_blank" rel="noopener">
+            <img src="https://github.com/luccas00.png" alt="Foto de perfil de Luccas" width="180"
+              style="border-radius: 50%; border: 3px solid var(--border);">
+          </a>
+        </div>
 
-    <!-- Bloco que renderiza README.md e README.pt-BR.md -->
+        <div>
+          <div id="myLine" class="title-actions">
+            <h1 data-i18n="helloThere">Hello there, I'm Luccas</h1> <h1>👨🏼‍💻🎓</h1>
+            <a class="btn with-icon" href="https://github.com/luccas00" target="_blank" rel="noopener">
+              <img class="icon" src="/images/github-color-svgrepo-com.svg" alt="GitHub">
+              <span>GitHub</span>
+            </a>
+          </div>
+
+          <h2 data-i18n="about.0">I'm a Power Platform and Dynamics 365 developer!!</h2>
+          <p>
+            <span data-i18n="about.job"><strong>Senior Developer</strong></span><span data-i18n="about.jobDescription"> | Specialist in Power Platform and Dynamics 365 | Certified Power Platform Functional Consultant [PL-200] | Business Solutions Expert</span>
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <p>🔭 <span data-i18n="about.1">Committed to continuously improving my development skills and problem-solving abilities, aiming to deliver
+          efficient technological solutions.</span></p>
+        <p>🌱 <span data-i18n="about.2">Enhancing my knowledge in Microsoft Power Platform, Dynamics 365, .NET, ASP.NET MVC, Node.js, Microsoft
+          SQL Server, and Azure to deliver integrated and scalable solutions.</span></p>
+        <p>💻 <span data-i18n="about.3">At Smart Consulting, I contribute to improving the efficiency and quality of our clients' projects. I have
+          experience in adapting and configuring Dynamics 365 business applications, with a focus on Project Operations
+          (project and finance operations), Customer Service (customer support), and Dynamics 365 Sales.</span></p>
+        <p>🏫 <span data-i18n="about.4">Pursuing a Bachelor's degree in Information Systems at UFOP (Federal University of Ouro Preto)</span></p>
+      </div>
+    </section>
+
+    <!-- ==== BLOCO DE READMEs RENDERIZADOS PELO JEKYLL ==== -->
     <section class="card" id="readme-mirror">
       <div id="readme-en" class="i18n-readme" data-lang="en-US">
         {% capture readme_en %}{% include_relative README.md %}{% endcapture %}
@@ -49,31 +89,44 @@
     <footer class="container center">
       <p>© <span id="y"></span> Luccas Carneiro — Power Platform & Dynamics 365</p>
       <p style="font-size: 0.8em; color: var(--muted);">
-        Background Matrix effect by <a href="https://github.com/rezmason/matrix" target="_blank"
-          rel="noopener">Rezmason</a> — Licensed under MIT.
+        Background Matrix effect by <a href="https://github.com/rezmason/matrix" target="_blank" rel="noopener">Rezmason</a> — Licensed under MIT.
       </p>
     </footer>
 
   </main>
+
   <script src="js/navbar.js"></script>
   <script src="js/common.js"></script>
   <script src="js/matrix.js" defer></script>
 
   <script>
     (function () {
-      const lang = localStorage.getItem('lang') || 'en-US';
-      toggleReadme(lang);
-
-      document.addEventListener('lang:changed', e => {
-        toggleReadme(e.detail?.lang || 'en-US');
-      });
+      // Fonte de verdade do idioma
+      const getLang = () => localStorage.getItem('lang') || document.documentElement.lang || 'en-US';
 
       function toggleReadme(lang) {
         document.querySelectorAll('#readme-mirror .i18n-readme')
           .forEach(el => el.classList.toggle('active', el.dataset.lang === lang));
       }
+
+      // Inicial
+      toggleReadme(getLang());
+
+      // Integra com seu toggle atual:
+      // 1) Evento customizado (se já existir no common.js)
+      document.addEventListener('lang:changed', e => toggleReadme(e.detail?.lang || getLang()));
+
+      // 2) Storage fallback (outra aba/janela)
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'lang') toggleReadme(getLang());
+      });
+
+      // 3) Click fallback (seu toggle usa .lang-switch .lang-opt)
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.lang-switch .lang-opt');
+        if (btn) setTimeout(() => toggleReadme(getLang()), 0);
+      });
     })();
   </script>
 </body>
-
 </html>
