@@ -31,7 +31,9 @@
   "cert.title.pl200": "Consultor Funcional Associado do Power Platform",
   "cert.title.pl900": "Conceitos básicos do Power Platform",
   "cert.title.as1": "Criar e gerenciar aplicativos baseados em modelo com o Power Apps e o Dataverse",
-  "cert.title.as2": "Criar e gerenciar processos automatizados usando o Power Automate",
+  "cert.title.as2": "Criar e gerenciar aplicativos de tela com o Power Apps",
+  "cert.title.as3": "Criar e gerenciar processos automatizados usando o Power Automate",
+  "cert.title.as4": "Desenvolver um aplicativo web ASP.NET Core que consome uma API",
   "cert.title.dotnet": "Formação .NET Developer",
   "cert.title.crm": "Formação CRM Dynamics 365 Developer"
 }
