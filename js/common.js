@@ -18,7 +18,7 @@
 
 // Internationalization + Learn links locale rewrite
 (function(){
-  const DEFAULT_LANG = 'en-US';
+  const DEFAULT_LANG = document.documentElement?.dataset.defaultLang || 'en-US';
   const SUPPORTED = ['pt-BR','en-US'];
   let lang = resolveLang();
   let dict = {};
@@ -50,7 +50,7 @@
   function resolveLang(){
     const urlLang = new URLSearchParams(location.search).get('lang');
     const stored   = localStorage.getItem('lang');
-    const navLang  = (navigator.language || '').toLowerCase().startsWith('pt') ? 'pt-BR' : 'en-US';
+    const navLang  = DEFAULT_LANG;
     return (urlLang && SUPPORTED.includes(urlLang)) ? urlLang
          : (stored   && SUPPORTED.includes(stored)) ? stored
          : navLang || DEFAULT_LANG;
