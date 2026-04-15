@@ -335,6 +335,12 @@ footer{ color:var(--muted); font-size:.9rem; margin-top:24px }
 .cert-card{ transition: transform .12s ease, border-color .2s, box-shadow .2s; }
 .cert-card:hover{ transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 8px 20px rgba(0,0,0,.25); }
 
+.cert-card-single {
+  grid-column: 1 / -1;     /* ocupa as 2 colunas */
+  max-width: 420px;        /* limita largura */
+  margin: 0 auto;          /* centraliza horizontal */
+}
+
 /* Responsivo */
 @media (max-width: 640px){
   .cert-card{ grid-template-columns: 1fr; text-align:center; }
