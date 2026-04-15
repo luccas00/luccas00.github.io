@@ -337,7 +337,7 @@ footer{ color:var(--muted); font-size:.9rem; margin-top:24px }
 
 .cert-card-single {
   grid-column: 1 / -1;     /* ocupa as 2 colunas */
-  max-width: 420px;        /* limita largura */
+  max-width: 440px;        /* limita largura */
   margin: 0 auto;          /* centraliza horizontal */
 }
 
