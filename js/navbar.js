@@ -15,11 +15,6 @@
           <span>Home</span>
         </a>
 
-        <a class="btn with-icon" href="/projects.html">
-          <img class="icon" src="/images/development-web-development-svgrepo-com.svg" alt="" aria-hidden="true">
-          <span>Projects</span>
-        </a>
-
         <a class="btn with-icon" href="${certUrl}" target="_blank" rel="noopener">
           <img class="icon" src="/images/microsoft-svgrepo-com.svg" alt="" aria-hidden="true">
           <span>Certifications</span>
@@ -33,17 +28,7 @@
           <span>LinkedIn</span>
         </a>
 
-        <a class="btn with-icon" href="/resume.html" aria-label="Resume">
-          <img class="icon" src="/images/curriculum-information-svgrepo-com.svg" alt="" aria-hidden="true">
-          <span>Resume</span>
-        </a>
-
         <span class="nav-spacer" aria-hidden="true"></span>
-
-        <div class="lang-switch" role="group" aria-label="Select language">
-          <button class="lang-opt" data-lang="pt-BR" type="button" aria-pressed="false">PT</button>
-          <button class="lang-opt" data-lang="en-US" type="button" aria-pressed="true">EN</button>
-        </div>
 
         <div class="theme-switch" role="group" aria-label="Select theme">
           <button class="theme-opt" data-theme="dark" type="button" aria-pressed="true" title="Dark theme">🌙</button>
